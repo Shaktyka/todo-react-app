@@ -2,16 +2,23 @@ import React from 'react';
 import './todo-list-item.css';
 
 export default class TodoListItem extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  state = {
+    done: false
+  };
 
-  onLabelClick = (evt) => {
-    console.log(evt.target);
+  onLabelClick = () => {
+    this.setState({ done: true });
+    // console.log(evt.target);
   }
 
   render() {
     const { label, important = false } = this.props;
+    const { done } = this.state;
+
+    let classNames = 'todo-list-item';
+    if (done) {
+      classNames += ' done';
+    }
 
     const elStyle = {
       color: important ? 'steelblue' : 'black',
@@ -19,7 +26,7 @@ export default class TodoListItem extends React.Component {
     };
 
     return (
-      <span className="todo-list-item">
+      <span className={ classNames }>
         <span
           className="todo-list-item-label"
           style={ elStyle }
