@@ -3,12 +3,9 @@ import ReactDOM from 'react-dom';
 import TodoList from './components/todo-list.js';
 import SearchPanel from './components/search-panel.js';
 import AppHeader from './components/app-header.js';
+import ItemStatusFilter from './components/item-status-filter.js';
 
 const App = () => {
-  const isLoggedIn = true;
-  const loginBox = <p>Log in, please</p>;
-  const welcomeBox = <p>Welcome Back!</p>;
-
   const todoData = [
     {
       id: 111,
@@ -34,10 +31,8 @@ const App = () => {
 
   return (
     <div>
-      <span>{ new Date().toString() }</span>
-      { isLoggedIn ? welcomeBox : loginBox }
       <AppHeader />
-      <SearchPanel />
+      <SearchPanel /><ItemStatusFilter />
       <TodoList tasks={ todoData } />
     </div>
   );
