@@ -9,13 +9,36 @@ const App = () => {
   const loginBox = <p>Log in, please</p>;
   const welcomeBox = <p>Welcome Back!</p>;
 
+  const todoData = [
+    {
+      id: 111,
+      label: 'Drink Coffee',
+      important: false
+    },
+    {
+      id: 222,
+      label: 'Learn React',
+      important: true
+    },
+    {
+      id: 333,
+      label: 'Build React App',
+      important: true
+    },
+    {
+      id: 444,
+      label: 'Have a Lunch',
+      important: false
+    }
+  ];
+
   return (
     <div>
       <span>{ new Date().toString() }</span>
       { isLoggedIn ? welcomeBox : loginBox }
       <AppHeader />
       <SearchPanel />
-      <TodoList />
+      <TodoList tasks={ todoData } />
     </div>
   );
 };
