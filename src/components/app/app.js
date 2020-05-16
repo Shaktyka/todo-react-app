@@ -7,8 +7,9 @@ import TodoList from '../todo-list/';
 
 import './app.css';
 
-const App = () => {
-  const todoData = [
+export default class App extends React.Component {
+  state = {
+    todoData: [
     {
       id: 111,
       label: 'Drink Coffee',
@@ -29,18 +30,22 @@ const App = () => {
       label: 'Have a Lunch',
       important: false
     }
-  ];
+  ]
+  }
 
-  return (
-    <div className="todo-app">
-      <AppHeader toDo={1} done={3} />
-      <div className="top-panel d-flex">
-        <SearchPanel />
-        <ItemStatusFilter />
+  render() {
+    return (
+      <div className="todo-app">
+        <AppHeader toDo={1} done={3} />
+        <div className="top-panel d-flex">
+          <SearchPanel />
+          <ItemStatusFilter />
+        </div>
+        <TodoList
+          tasks={ this.state.todoData }
+          onDeleted={ (id) => console.log(id) }
+        />
       </div>
-      <TodoList tasks={ todoData } />
-    </div>
-  );
-};
-
-export default App;
+    );
+  }
+}
