@@ -33,6 +33,16 @@ export default class App extends React.Component {
   ]
   }
 
+  // Удаление элемента из массива
+  deleteItem = (id) => {
+    this.setState(({ todoData }) => {
+      const newArray = todoData.filter((el) => el.id !== id);
+      return {
+        todoData: newArray
+      }
+    });
+  }
+
   render() {
     return (
       <div className="todo-app">
@@ -43,7 +53,7 @@ export default class App extends React.Component {
         </div>
         <TodoList
           tasks={ this.state.todoData }
-          onDeleted={ (id) => console.log(id) }
+          onDeleted={ this.deleteItem }
         />
       </div>
     );

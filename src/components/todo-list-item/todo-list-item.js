@@ -7,12 +7,14 @@ export default class TodoListItem extends React.Component {
     important: false
   };
 
+  // Первый вариант
   onLabelClick = () => {
     this.setState(({done}) => {
       return { done: !done };
     });
   }
 
+  // Второй вариант
   onMarkImportant = () => {
     this.setState((state) => {
       return { important: !state.important }
