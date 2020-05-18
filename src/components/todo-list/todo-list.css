@@ -1,3 +1,7 @@
+.todo-list {
+  margin-bottom: 10px;
+}
+
 .todo-list .list-group-item {
   display: flex;
   align-items: center;
