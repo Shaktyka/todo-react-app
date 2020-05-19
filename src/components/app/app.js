@@ -12,31 +12,32 @@ import './app.css';
 export default class App extends React.Component {
   state = {
     todoData: [
-    {
-      id: 111,
-      label: 'Drink Coffee',
-      important: false,
-      done: false
-    },
-    {
-      id: 222,
-      label: 'Learn React',
-      important: true,
-      done: false
-    },
-    {
-      id: 333,
-      label: 'Build React App',
-      important: true,
-      done: false
-    },
-    {
-      id: 444,
-      label: 'Have a Lunch',
-      important: false,
-      done: false
-    }
-    ]
+      {
+        id: 111,
+        label: 'Drink Coffee',
+        important: false,
+        done: false
+      },
+      {
+        id: 222,
+        label: 'Learn React',
+        important: true,
+        done: false
+      },
+      {
+        id: 333,
+        label: 'Build React App',
+        important: true,
+        done: false
+      },
+      {
+        id: 444,
+        label: 'Have a Lunch',
+        important: false,
+        done: false
+      }
+    ],
+    searchText: ''
   }
 
   findIndex =(id) => {
@@ -66,7 +67,6 @@ export default class App extends React.Component {
 
   // Добавление элемента в массив
   addItem = (text = 'Task N') => {
-    // console.log(text);
     const newItem = this.createTodoItem(text);
 
     this.setState(({ todoData }) => {
@@ -105,8 +105,26 @@ export default class App extends React.Component {
     });
   }
 
+  search = (tasks, text) => {
+    if (text.length === 0) {
+      return tasks;
+    }
+
+    return tasks.filter((el) => {
+      return el.label
+        .toLowerCase()
+        .indexOf(text.toLowerCase()) > -1;
+    });
+  }
+
+  onSearchHandler = (text) => {
+    this.setState({ searchText: text });
+  }
+
   render() {
-    const { todoData } = this.state;
+    const { todoData, searchText } = this.state;
+
+    const visibleItems = this.search(todoData, searchText);
     const doneCount = todoData.filter((el) => el.done).length;
     const todoCount = todoData.length - doneCount;
 
@@ -114,11 +132,11 @@ export default class App extends React.Component {
       <div className="todo-app">
         <AppHeader toDo={ todoCount } done={ doneCount } />
         <div className="top-panel d-flex">
-          <SearchPanel />
+          <SearchPanel onSeachChange={ this.onSearchHandler } />
           <ItemStatusFilter />
         </div>
         <TodoList
-          tasks={ todoData }
+          tasks={ visibleItems }
           onDeleted={ this.deleteItem }
           onToggleImportant={ this.onToggleImportant }
           onToggleDone={ this.onToggleDone }
