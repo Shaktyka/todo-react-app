@@ -64,18 +64,17 @@ export default class App extends React.Component {
     }
   }
 
-  // Пофиксить
   // Добавление элемента в массив
   addItem = (text = 'Task N') => {
-    console.log(text);
-    // const newItem = this.createTodoItem(text);
+    // console.log(text);
+    const newItem = this.createTodoItem(text);
 
-    // this.setState(({ todoData }) => {
-    //   const newArray = [...todoData, newItem];
-    //   return {
-    //     todoData: newArray
-    //   }
-    // });
+    this.setState(({ todoData }) => {
+      const newArray = [...todoData, newItem];
+      return {
+        todoData: newArray
+      }
+    });
   }
 
   toggleProperty = (arr, id, propName) => {
@@ -129,3 +128,9 @@ export default class App extends React.Component {
     );
   }
 }
+
+/*
+  Что ещё сделать:
+  - редактирование тасков
+  - дата дедлайна
+ */
