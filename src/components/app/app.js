@@ -40,6 +40,7 @@ export default class App extends React.Component {
     searchText: ''
   }
 
+  // Найти индекс элемента в массиве
   findIndex =(id) => {
     return this.state.todoData.findIndex((el) => el.id === id);
   }
@@ -54,8 +55,10 @@ export default class App extends React.Component {
     });
   }
 
-  getRandomNumber = () => Math.round(Math.random() * 10);
+  // Сгенерировать случайное число до 100
+  getRandomNumber = () => Math.round(Math.random() * 100);
 
+  // Добавить новую задачу
   createTodoItem = (text) => {
     return {
       id: uuidv4(4),
@@ -105,13 +108,13 @@ export default class App extends React.Component {
     });
   }
 
-  search = (tasks, text) => {
+  search = (items, text) => {
     if (text.length === 0) {
-      return tasks;
+      return items;
     }
 
-    return tasks.filter((el) => {
-      return el.label
+    return items.filter((item) => {
+      return item.label
         .toLowerCase()
         .indexOf(text.toLowerCase()) > -1;
     });
@@ -132,7 +135,7 @@ export default class App extends React.Component {
       <div className="todo-app">
         <AppHeader toDo={ todoCount } done={ doneCount } />
         <div className="top-panel d-flex">
-          <SearchPanel onSeachChange={ this.onSearchHandler } />
+          <SearchPanel onSearchChange={ this.onSearchHandler } />
           <ItemStatusFilter />
         </div>
         <TodoList
